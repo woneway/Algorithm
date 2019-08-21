@@ -8,6 +8,11 @@ public class ExchangeTypeSort extends SortBasic {
         int size = 10000;
         bubbleSort(randomArr(size));
         quickSort(randomArr(size));
+
+
+        int test[] = {11, 2, 34, 7, 1, 9, 12, 11, 56, -2, 11};
+        quickSort(test);
+        printArr(test);
     }
 
     //1.冒泡排序
@@ -44,11 +49,20 @@ public class ExchangeTypeSort extends SortBasic {
     private static int partition(int[] arr, int low, int high) {
         int midV = arr[low];
         while (low < high) {
-            while (low < high && arr[low] <= midV) ++low;
             while (low < high && arr[high] >= midV) --high;
-            swap(arr, low, high);
+            arr[low] = arr[high];
+            while (low < high && arr[low] <= midV) ++low;
+            arr[high] = arr[low];
         }
         arr[low] = midV;
         return low;
+//        int midV = arr[low];
+//        while (low < high) {
+//            while (low < high && arr[high] >= midV) --high;
+//            swap(arr, low, high);
+//            while (low < high && arr[low] <= midV) ++low;
+//            swap(arr, low, high);
+//        }
+//        return high;
     }
 }
