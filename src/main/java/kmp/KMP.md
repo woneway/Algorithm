@@ -34,7 +34,7 @@ a b a b c d e f a c
 
 那么假设第k(0<k<j)个元素与主串中的第i个元素继续比较，则有：
 ```text
-$p(0)p(1)...p(k-1) = S(i-k)S(i-k+1)..S(i-1) - （式一）$
+p(0)p(1)...p(k-1) = S(i-k)S(i-k+1)..S(i-1) - （式一）
 ```
 又因为Si之前的j个元素和Pj之前的j个元素时相等的，所以有：
 ```text
@@ -61,13 +61,12 @@ S(0) S(1) ... S(i-j)  S(i-j+1)  S(i-k) ... ... S(i-1) S(i)
 
 式三的等式左边是0到j-1串的前缀，等式右边是0到j-1串的后缀，而k也就是j下一步移动到的元素的位置。
 
-next = \overbrace$$
 
-$$ $next[j]$=\left\{
+$$ $next\[j\]$=\left\{
 \begin{aligned}
 -1 &  \text{j = 0} \\
-Max{k|0<k<j且'$p_0&...$p_k-1$' = '$p_j-k$...$p_j-1$} \\
-0 &  \text{其他情况} xy
+Max{k|0<k<j且'p_0...p_k-1' = 'p_j-k...p_j-1} \\
+0 &  \text{其他情况}
 \end{aligned}
 \right.
 $$
