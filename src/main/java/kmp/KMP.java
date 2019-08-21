@@ -1,46 +1,48 @@
 package kmp;
 
+import java.util.Random;
+
 public class KMP {
     public static void main(String[] args) {
-        String source = "dfagggggggggggggggggggggggggggggggggggggggggtrgpdsffffffffffffffffffffoijnooooooooooooooooooooovvvvvvvvvvvvvvvvverrrrrrrrrrrrrrrrpppppppppppppppppsdfosdjgfowgowhgowhnpgwhrpgjwpogjwpejfpwejfpweojfpwejfpwejfpwejpwjdvvfvjeorjboerboehbo" +
-                "jsodfffffffffffffffjvwrohwroghorhgoerjgpwjfpwjevndhiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiqfehioppwvbwogjwepjfpavoafdg;hado;ghvao;dfjgoafjosdgfojfdlgdjflksndlv" +
-                "fowhgowgowgoerjgpwepfkwdfklsdbneoppwefjwbnodjfsdnboejf[wjjnvpejobonwjpoggggggggggggggggggggggggggggggjo" +
-                "hoiwghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhjldsvjlkkdfvgdaoi;fgaeofsdfsdfskdfosdhfoi;goaeoiagovaiiiiiiiiiiiiiiiiiiiiiiif;dhosdhfosdgowjgowgowhhgowhhjgowhgowhogwofwojfcowencwoiwoefheoevpwefj'" +
-                "nowhovgweoigweogjwojfodsnvnkwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwehgwehgoiwjfpewkopfjwghwoegjofvkfdjlkdsjlgjlsdjfsdjfowjepghwobgherojweojdodvoeioggweoigv" +
-                "wobhvoiwrrrrrrrrrrrrrrrrrrrrrrrrrrroihosdjfcownborhoejvsdfgosdfgdsfhbvkdlfcnvkdcnvoiaegoanfvoafnboaejrfghang;horf" +
-                "ierfhgsijfgilshdgisfhgshrgihsrtibsfjkbvkjsafdddddddddddddddddddddddddddddddddddddddddddddddddhgggggggggggggggggggggohoigwhroghwroghowrighwro" +
-                "fowhgowgowgoerjgpwepfkwdfklsdbneoppwefjwbnodjfsdnboejf[wjjnvpejobonwjpoggggggggggggggggggggggggggggggjo" +
-                "hoiwghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhjldsvjlkkdfvgdaoi;fgaeo;goaeoiagovaiiiiiiiiiiiiiiiiiiiiiiif;dhosdhfosdgowjgowgowhhgowhhjgowhgowhogwofwojfcowencwoiwoefheoevpwefj'" +
-                "nowhovgweoigweogjwojfodsnvnkwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwehgwehgoiwjfpewkopfjwghwoegjofvkfdjlkdsjlgjlsdjfsdjfowjepghwobgherojweojdodvoeioggweoigv" +
-                "wobhvoiwrrrrrrrrrrrrrrrrrrrrrrrrrrroihosdjfcownborhoejvsdfgosdfgdsfhbvkdlfcnvkdcnvoiaegoanfvoafnboaejrfghang;horf" +
-                "ierfhgsijfgilshdgisfhgshrgihsrtibsfjkbvkjsafdddddddddddddddddddddddddddddddddddddddddddddddddhgggggggggggggggggggggohoigwhroghwroghowrighwro" +
-                "fowhgowgowgoerjgpwepfkwdfklsdbneoppwefjwbnodjfsdnboejf[wjjnvpejobonwjpoggggggggggggggggggggggggggggggjo" +
-                "hoiwghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhjldsvjlkkdfvgdaoi;fgaeo;goaeoiagovaiiiiiiiiiiiiiiiiiiiiiiif;dhosdhfosdgowjgowgowhhgowhhjgowhgowhogwofwojfcowencwoiwoefheoevpwefj'" +
-                "nowhovgweoigweogjwojfodsnvnkwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwehgwehgoiwjfpewkopfjwghwoegjofvkfdjlkdsjlgjlsdjfsdjfowjepghwobgherojweojdodvoeioggweoigv" +
-                "wobhvoiwrrrrrrrrrrrrrrrrrrrrrrrrrrroihosdjfcownborhoejvsdfgosdfgdsfhbvkdlfcnvkdcnvoiaegoanfvoafnboaejrfghang;horf" +
-                "ierfhgsijfgilshdgisfhgshrgihsrtibsfjkbvkjsafdddddddddddddddddddddddddddddddddddddddddddddddddhgggggggggggggggggggggohoigwhroghwroghowrighwro" +
-                "fowhgowgowgoerjgpwepfkwdfklsdbneoppwefjwbnodjfsdnboejf[wjjnvpejobonwjpoggggggggggggggggggggggggggggggjo" +
-                "hoiwghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhjldsvjlkkdfvgdaoi;fgaeo;goaeoiagovaiiiiiiiiiiiiiiiiiiiiiiif;dhosdhfosdgowjgowgowhhgowhhjgowhgowhogwofwojfcowencwoiwoefheoevpwefj'" +
-                "nowhovgweoigweogjwojfodsnvnkwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwehgwehgoiwjfpewkopfjwghwoegjofvkfdjlkdsjlgjlsdjfsdjfowjepghwobgherojweojdodvoeioggweoigv" +
-                "wobhvoiwrrrrrrrrrrrrrrrrrrrrrrrrrrroihosdjfcownborhoejvsdfgosdfgdsfhbvkdlfcnvkdcnvoiaegoanfvoafnboaejrfghang;horf" +
-                "ierfhgsijfgilshdgisfhgshrgihsrtibsfjkbvkjsafdddddddddddddddddddddddddddddddddddddddddddddddddhgggggggggggggggggggggohoigwhroghwroghowrighwro" +
-                "fbgirsehgshgifshgusfghsifgfdfdsshisrhrgisrhgisrtrtjhotrjjjjjjjiohjprdfnpppppppppppppppppsjfdgiiiiiiiiii个ughhhhhhhhhhhhhhhhuiwhrgowehgoweofjweoifjqewofhwoehgowhgowrhgoi" +
-                "ifhwohfoiwehfoiwefoiwejfojweononvoeoiwjfowejfwjogjwrrogjwogjowgonvoeogeogsofglfddfnbvdfnbefpwejgogowgjojgoejgoeojorjgoejrgowjgowgoegoerjgoerrjgoegjeogjeogeogjeogeogjoegjoegffv";
-
-        String pattern = "fdfdssh";
+        String source = randomStr(200000000);
+        String pattern = randomStr(5);
 
         int startIndex = 0;
-
+        Long startTime = System.currentTimeMillis();
         int index1 = indexOf(source, pattern, startIndex);
-        System.out.println(index1);
-        int index2 = kmp(source, pattern, startIndex);
-        System.out.println(index2);
-        int index3 = kmpBetter(source, pattern, startIndex);
-        System.out.println(index3);
+        System.out.println(System.currentTimeMillis() - startTime);
 
-        System.out.println(source.substring(index1, pattern.length() + index1).equals(pattern));
+
+        startTime = System.currentTimeMillis();
+        int index2 = kmp(source, pattern, startIndex);
+        System.out.println(System.currentTimeMillis() - startTime);
+
+        startTime = System.currentTimeMillis();
+        int index3 = kmpBetter(source, pattern, startIndex);
+        System.out.println(System.currentTimeMillis() - startTime);
+
+
+        System.out.println(index1);
+        System.out.println(index2);
+        System.out.println(index3);
+        if (index1 != -1) {
+            System.out.println(source.substring(index1, pattern.length() + index1));
+            System.out.println(source.substring(index1, pattern.length() + index1).equals(pattern));
+        }
     }
 
+
+    public static String randomStr(int length) {
+        String source = "abcdefghijklmnopqrstuvwxyz";
+        Random random = new Random();
+        StringBuilder builder = new StringBuilder();
+        int i = 0;
+        while (i < length) {
+            builder.append(source.charAt(random.nextInt(26)));
+            i++;
+        }
+        return builder.toString();
+    }
 
     public static int indexOf(String source, String pattern, int startIndex) {
         int i = startIndex, j = 0;
